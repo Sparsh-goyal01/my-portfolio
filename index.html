@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css">
+<title>Professional Developer Portfolio</title>
+<!-- Icons from FontAwesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+<header>
+  <div class="logo" tabindex="0">
+     <h1><span id="typing"></span></h1>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+      new Typed("#typing", {
+        strings: ["Sparsh Goyal", "Dream, Code, Conquer!!"],
+        typeSpeed: 40,
+        backSpeed: 30,
+        loop: true
+      });
+    </script>
+  </div>
+  <nav aria-label="Primary navigation">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <!-- <a href="#experience">Experience</a> -->
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<main>
+  <section class="profile-summary" aria-label="Profile Summary">
+    <div class="profile-img" aria-hidden="true">
+      <img src="profile.jpeg" alt="profile photo" />
+    </div>
+    <div class="profile-details">
+      <h1 tabindex="0">Sparsh Goyal</h1>
+      <h2 tabindex="0">Developer</h2>
+      <p tabindex="0">
+        Aspiring Developer skilled in building modern web applications using JavaScript, Node.js.
+      </p>
+      <div class="divider" aria-hidden="true"></div>
+      <p tabindex="0">
+        Interests: Web Development, Data Analytics, DSA, Open Source.
+      </p>
+      <div class="divider" aria-hidden="true"></div>
+      <div class="social-links" aria-label="Social media profiles">
+        <a href="index.html" aria-label="homepage" rel="noopener noreferrer"><i class="fas fa-home"></i></a>
+        <a href="mailto:sparshgoyal2008.bittu@gmail.com" aria-label="Send email to Sparsh goyal"><i class="fas fa-envelope"></i></a>
+        <a href="https://github.com/Sparsh-goyal01" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/sparshgoyal06" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com/#" aria-label="Twitter profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com/Sparsh_goyal01" aria-label="Instagram profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="skills" aria-label="Skills">
+    <h2 tabindex="0">Skills</h2>
+    <div class="skills-list" role="list">
+    <ul>
+     <li> <span class="skill-badge" role="listitem">JavaScript</span>          </li>
+     <li> <span class="skill-badge" role="listitem">Data Analysis</span>       </li>
+     <li> <span class="skill-badge" role="listitem">Node.js</span>             </li>
+     <!-- <li> <span class="skill-badge" role="listitem">MongoDB</span>    </li> -->
+     <li> <span class="skill-badge" role="listitem">Git/GitHub</span>          </li>
+     <li> <span class="skill-badge" role="listitem">Power-BI / Tableau</span>             </li>
+     <li> <span class="skill-badge" role="listitem">Excel Data Management</span>          </li>
+     <!-- <li> <span class="skill-badge" role="listitem">REST APIs</span>  </li> -->
+    </ul>
+</div>
+  </section>
+
+  <section id="projects" class="projects">
+    <h2 tabindex="0">Projects</h2>
+    <ul class="project-list">
+      <li class="project-item">
+        <div class="project-img" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=150&q=80" alt="Project Vacay thumbnail" />
+        </div>
+        <div class="project-content">
+          <h3>Student Result Management System</h3>
+          <p class="project-description">
+            A Basic responsive full stack web learning project for updating student results as a College & School edition.
+          </p>
+          <div class="project-tags" aria-label="Project technologies used">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Nodejs</span>
+            <span class="tag">Json Storage</span>
+            <span class="tag">GitHub</span>
+          </div>  
+          <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-vacay-desc" data-target="project">Read More</button>
+          <p id="project-vacay-desc" hidden>
+            Developed a full-stack web application to streamline result entry and display for educational institutions. The system allows users to add, store, view, and export student academic results through a responsive and interactive interface.
+          </p> -->
+        </div>
+        <div class="project-year" aria-label="Project year">2025</div>
+      </li>
+      <li class="project-item">
+        <div class="project-img" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=150&q=80" alt="Project Micromouse thumbnail" />
+        </div>
+        <div class="project-content">
+          <h3>Chatify-Ai-chat-enhancer</h3>
+          <p class="project-description">
+            Chat enhancer using AI to professionalize conversation within a friendly web interface.
+          </p>
+          <div class="project-tags" aria-label="Project technologies used">
+            <span class="tag">HTML CSS</span>
+            <span class="tag">Json Storage</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-micromouse-desc" data-target="project">Read More</button>
+          <p id="project-micromouse-desc" hidden>
+            Chat enhancer using AI to professionalize conversation within a friendly web interface.
+          </p> -->
+        </div>
+        <div class="project-year" aria-label="Project year">2024</div>
+      </li>
+      <!-- <li class="project-item">
+        <div class="project-img" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=150&q=80" alt="Project CodeCamp thumbnail" />
+        </div>
+        <div class="project-content">
+          <h3>CodeCamp</h3>
+          <p class="project-description">
+            Interactive coding bootcamp platform to teach JavaScript, React, and Node.js fundamentals.
+          </p>
+          <div class="project-tags" aria-label="Project technologies used">
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Express</span>
+          </div>
+          <button class="read-more-btn" aria-expanded="false" aria-controls="project-codecamp-desc" data-target="project-codecamp-desc">Read More</button>
+          <p id="project-codecamp-desc" hidden>
+            CodeCamp is an online learning platform providing interactive coding lessons and real-time code challenges with instant feedback. It uses modern web technologies including React for frontend and Node.js/Express for the backend API.
+          </p>
+        </div>
+        <div class="project-year" aria-label="Project year">2021</div> -->
+      </li>
+    </ul>
+  </section>
+
+  <!-- <section id="experience" class="experience">
+    <h2 tabindex="0">Experience</h2>
+    <ul class="experience-list">
+      <li class="experience-item">
+        <h3>Senior Software Engineer</h3>
+        <div class="experience-role">TechInnovate Corp</div>
+        <div class="experience-duration">2021 - Present</div>
+        <p class="experience-description">
+          Leading a team of developers building scalable web applications and microservices. Architecting cloud solutions on AWS and mentoring junior engineers.
+        </p>
+      </li>
+      <li class="experience-item">
+        <h3>Full Stack Developer</h3>
+        <div class="experience-role">NextGen Solutions</div>
+        <div class="experience-duration">2017 - 2021</div>
+        <p class="experience-description">
+          Developed and maintained client projects involving React frontends and Node.js backends with RESTful APIs. Improved CI/CD pipelines and reduced deployment times by 40%.
+        </p>
+      </li>
+      <li class="experience-item">
+        <h3>Software Developer Intern</h3>
+        <div class="experience-role">StartupX</div>
+        <div class="experience-duration">Summer 2016</div>
+        <p class="experience-description">
+          Created internal tools for automating report generation and analysis. Collaborated closely with product team on UX improvements.
+        </p>
+      </li>
+    </ul>
+  </section> -->
+
+  
+
+  <section id="resume" class="resume" aria-label="Resume download">
+    <h2 tabindex="0">Resume</h2>
+    <a href="resumeSparsh.pdf" class="resume-link" download aria-label="Download resume as PDF">Download My Resume (PDF)</a>
+  </section>
+
+  <section id="contact" class="contact" aria-label="Contact form">
+    <h2 tabindex="0">Contact Me</h2>
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-group">
+        <label for="name">Name <sup>*</sup></label>
+        <input type="text" id="name" name="name" required aria-required="true" aria-describedby="nameError" placeholder="Your full name" />
+        <small id="nameError" aria-live="polite" style="color:#d00;"></small>
+      </div>
+      <div class="form-group">
+        <label for="email">Email <sup>*</sup></label>
+        <input type="email" id="email" name="email" required aria-required="true" aria-describedby="emailError" placeholder="you@example.com" />
+        <small id="emailError" aria-live="polite" style="color:#d00;"></small>
+      </div>
+      <div class="form-group">
+        <label for="message">Message <sup>*</sup></label>
+        <textarea id="message" name="message" required aria-required="true" aria-describedby="messageError" placeholder="Your message here..." rows="5"></textarea>
+        <small id="messageError" aria-live="polite" style="color:#d00;"></small>
+      </div>
+      <button type="submit">Send Message</button>
+      <p id="formStatus" role="alert" style="margin-top:1rem; color:green;"></p>
+    </form>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
+
