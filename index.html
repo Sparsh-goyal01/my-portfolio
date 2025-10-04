@@ -4,18 +4,47 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="style.css">
-<title>Sparsh Goyal Portfolio</title>
+<title>Professional Developer Portfolio</title>
 <!-- Icons from FontAwesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
+<!-- tech-network background SVG (keeps DOM light, purely decorative) -->
+<svg id="tech-bg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="nodeGrad" x1="0" x2="1">
+      <stop offset="0%" stop-color="rgba(255,107,107,0.9)" />
+      <stop offset="100%" stop-color="rgba(255,182,93,0.9)" />
+    </linearGradient>
+  </defs>
+  <g id="links" stroke="rgba(255,255,255,0.06)" stroke-width="1">
+    <line x1="120" y1="120" x2="300" y2="190" />
+    <line x1="300" y1="190" x2="520" y2="140" />
+    <line x1="520" y1="140" x2="840" y2="220" />
+    <line x1="920" y1="80" x2="1100" y2="160" />
+    <line x1="200" y1="420" x2="480" y2="360" />
+    <line x1="700" y1="460" x2="920" y2="400" />
+  </g>
+  <g id="nodes">
+    <circle cx="120" cy="120" r="6" fill="url(#nodeGrad)" class="node" />
+    <circle cx="300" cy="190" r="7" fill="url(#nodeGrad)" class="node" />
+    <circle cx="520" cy="140" r="5" fill="url(#nodeGrad)" class="node" />
+    <circle cx="840" cy="220" r="8" fill="url(#nodeGrad)" class="node" />
+    <circle cx="920" cy="80" r="6" fill="url(#nodeGrad)" class="node" />
+    <circle cx="1100" cy="160" r="5" fill="url(#nodeGrad)" class="node" />
+    <circle cx="200" cy="420" r="6" fill="url(#nodeGrad)" class="node" />
+    <circle cx="480" cy="360" r="7" fill="url(#nodeGrad)" class="node" />
+    <circle cx="700" cy="460" r="5" fill="url(#nodeGrad)" class="node" />
+    <circle cx="920" cy="400" r="6" fill="url(#nodeGrad)" class="node" />
+  </g>
+</svg>
 <header>
   <div class="logo" tabindex="0">
      <h1><span id="typing"></span></h1>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
       new Typed("#typing", {
-        strings: ["Sparsh Goyal", "Craft, Code!!"],
+        strings: ["Sparsh Goyal", "Craft, Code!"],
         typeSpeed: 40,
         backSpeed: 30,
         loop: true
@@ -29,17 +58,43 @@
     <a href="#resume">Resume</a>
     <a href="#contact">Contact</a>
   </nav>
+  <button id="themeToggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle dark or light theme" onclick="(function(e){const r=document.documentElement; const is=r.classList.toggle('theme-dark'); try{ localStorage.setItem('theme', is? 'dark':'light'); }catch{} this.textContent=is? '☀️':'🌙'; this.setAttribute('aria-pressed', String(is)); }).call(this,event)">🌙</button>
 </header>
+<script>
+  (function(){
+    try{
+      const btn = document.getElementById('themeToggle');
+      if(!btn) return;
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const apply = (t) => {
+        if(t === 'dark') root.classList.add('theme-dark'); else root.classList.remove('theme-dark');
+        const isDark = root.classList.contains('theme-dark');
+        btn.textContent = isDark ? '☀️' : '🌙';
+        btn.setAttribute('aria-pressed', String(isDark));
+      };
+      apply(stored ? stored : (prefersDark ? 'dark' : 'light'));
+      btn.addEventListener('click', () => {
+        const isDark = root.classList.toggle('theme-dark');
+        const next = isDark ? 'dark' : 'light';
+        try{ localStorage.setItem('theme', next); } catch(e){}
+        btn.textContent = isDark ? '☀️' : '🌙';
+        btn.setAttribute('aria-pressed', String(isDark));
+      });
+    }catch(e){ console.error('theme init failed', e); }
+  })();
+</script>
 <main>
-  <section class="profile-summary" aria-label="Profile Summary">
+  <section class="profile-summary reveal" aria-label="Profile Summary">
     <div class="profile-img" aria-hidden="true">
-      <img src="profile.jpeg" alt="profile photo" />
+      <img src="profile.png" alt="profile photo" />
     </div>
     <div class="profile-details">
       <h1 tabindex="0">Sparsh Goyal</h1>
       <h2 tabindex="0">Developer</h2>
       <p tabindex="0">
-        Aspiring Developer skilled in building modern web applications using JavaScript, Node.js.
+        Aspiring Developer skilled in building modern web applications, Data Analysis & visualization and Problem Solving.
       </p>
       <div class="divider" aria-hidden="true"></div>
       <p tabindex="0">
@@ -48,7 +103,7 @@
       <div class="divider" aria-hidden="true"></div>
       <div class="social-links" aria-label="Social media profiles">
         <a href="index.html" aria-label="homepage" rel="noopener noreferrer"><i class="fas fa-home"></i></a>
-        <a href="mailto:sparshgoyalvlogs@gmail.com" aria-label="Send email to Sparsh goyal"><i class="fas fa-envelope"></i></a>
+        <a href="mailto:sparshgoyal2008.bittu@gmail.com" aria-label="Send email to Sparsh goyal"><i class="fas fa-envelope"></i></a>
         <a href="https://github.com/Sparsh-goyal01" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
         <a href="https://linkedin.com/in/sparshgoyal06" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
         <a href="https://twitter.com/#" aria-label="Twitter profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
@@ -57,18 +112,17 @@
     </div>
   </section>
 
-  <section id="skills" class="skills" aria-label="Skills">
+  <section id="skills" class="skills reveal" aria-label="Skills">
     <h2 tabindex="0">Skills</h2>
     <div class="skills-list" role="list">
     <ul>
-     <li> <span class="skill-badge" role="listitem">JavaScript</span>          </li>
-      <li> <span class="skill-badge" role="listitem">C++ (CPP)</span>          </li>
-     <li> <span class="skill-badge" role="listitem">Data Analysis</span>       </li>
-     <li> <span class="skill-badge" role="listitem">Node Js & Express Js</span>             </li>
-     <!-- <li> <span class="skill-badge" role="listitem">MongoDB</span>    </li> -->
-     <li> <span class="skill-badge" role="listitem">Git/GitHub</span>          </li>
-     <li> <span class="skill-badge" role="listitem">Power-BI / Tableau</span>             </li>
-     <li> <span class="skill-badge" role="listitem">Excel Data Management</span>          </li>
+     <li> <span class="skill-badge reveal" role="listitem">JavaScript</span>          </li>
+     <li> <span class="skill-badge reveal" role="listitem">Data Analysis</span>       </li>
+     <li> <span class="skill-badge reveal" role="listitem">Node.js</span>             </li>
+     <li> <span class="skill-badge reveal" role="listitem">DSA / C++ </span>    </li>
+     <li> <span class="skill-badge reveal" role="listitem">Git/GitHub</span>          </li>
+     <li> <span class="skill-badge reveal" role="listitem">Power-BI / Tableau</span>             </li>
+     <li> <span class="skill-badge reveal" role="listitem">Excel Data Management</span>          </li>
      <!-- <li> <span class="skill-badge" role="listitem">REST APIs</span>  </li> -->
     </ul>
 </div>
@@ -87,11 +141,10 @@
             A Basic responsive full stack web learning project for updating student results as a College & School edition.
           </p>
           <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag">JavaScript</span>
-            <span class="tag">Nodejs</span>
-             <span class="tag">Expressjs</span>
-            <span class="tag">Json Storage</span>
-            <span class="tag">GitHub</span>
+            <span class="tag tag--javascript">JavaScript</span>
+            <span class="tag tag--node">Nodejs</span>
+            <span class="tag tag--json">Json Storage</span>
+            <span class="tag tag--github">GitHub</span>
           </div>  
           <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-vacay-desc" data-target="project">Read More</button>
           <p id="project-vacay-desc" hidden>
@@ -105,14 +158,14 @@
           <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=150&q=80" alt="Project Micromouse thumbnail" />
         </div>
         <div class="project-content">
-          <h3><a href="https://github.com/Sparsh-goyal01/Chatify-Ai-chat-enhancer.git" style="text-decoration: none;">Chatify: AI chat enhancer</a></h3>
+          <h3>Chatify-Ai-chat-enhancer</h3>
           <p class="project-description">
             Chat enhancer using AI to professionalize conversation within a friendly web interface.
           </p>
           <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag">HTML CSS</span>
-            <span class="tag">Json Storage</span>
-            <span class="tag">JavaScript</span>
+            <span class="tag tag--htmlcss">HTML CSS</span>
+            <span class="tag tag--json">Json Storage</span>
+            <span class="tag tag--javascript">JavaScript</span>
           </div>
           <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-micromouse-desc" data-target="project">Read More</button>
           <p id="project-micromouse-desc" hidden>
@@ -132,9 +185,9 @@
             A Basic responsive Frontend based travel website Powered by IXIGO online booking platform for booking tickets having some unique features annd some are on under maintenance.
           </p>
           <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag">JavaScript</span>
-            <span class="tag">HTML5 & CSS3</span>
-            <span class="tag">GitHub</span>
+            <span class="tag tag--javascript">JavaScript</span>
+            <span class="tag tag--htmlcss">HTML5 & CSS3</span>
+            <span class="tag tag--github">GitHub</span>
           </div>  
           <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-vacay-desc" data-target="project">Read More</button>
           <p id="project-vacay-desc" hidden>
@@ -202,7 +255,7 @@
 
   <section id="resume" class="resume" aria-label="Resume download">
     <h2 tabindex="0">Resume</h2>
-    <a href="resumeSparsh.pdf" class="resume-link" download aria-label="Download resume as PDF">Download My Resume (PDF)</a>
+    <a href="myresume.pdf" class="resume-link" download aria-label="Download resume as PDF">Download My Resume (PDF)</a>
   </section>
 
   <section id="contact" class="contact" aria-label="Contact form">
