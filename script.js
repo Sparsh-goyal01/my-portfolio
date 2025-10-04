@@ -94,3 +94,58 @@
     return re.test(String(email).toLowerCase());
   }
 
+  /* Theme toggle (light/dark) stored in localStorage */
+  (function themeToggleInit(){
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      const applyTheme = (t) => {
+        try{
+          if(t === 'dark'){
+            root.classList.add('theme-dark');
+            if(themeToggle){ themeToggle.textContent = '☀️'; themeToggle.setAttribute('aria-pressed','true'); }
+          } else {
+            root.classList.remove('theme-dark');
+            if(themeToggle){ themeToggle.textContent = '🌙'; themeToggle.setAttribute('aria-pressed','false'); }
+          }
+        }catch(err){ console.error('applyTheme error', err); }
+      }
+
+    // initial (guarded)
+    const initial = stored ? stored : (prefersDark ? 'dark' : 'light');
+    applyTheme(initial);
+
+    if(themeToggle){
+      themeToggle.addEventListener('click', () => {
+        const isDark = root.classList.contains('theme-dark');
+        const next = isDark ? 'light' : 'dark';
+        applyTheme(next);
+        try{ localStorage.setItem('theme', next); } catch(e){ console.warn('Could not persist theme', e); }
+      });
+    } else {
+      console.warn('Theme toggle button not found (id="themeToggle").');
+    }
+  })();
+
+  /* Simple scroll reveal using IntersectionObserver */
+  (function revealOnScroll(){
+    const reveals = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      // fallback: make everything visible
+      reveals.forEach(r => r.classList.add('revealed'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {root:null, rootMargin: '0px 0px -8% 0px', threshold: 0.08});
+
+    reveals.forEach(r => obs.observe(r));
+  })();
+
