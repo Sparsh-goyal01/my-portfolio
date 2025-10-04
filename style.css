@@ -4,9 +4,69 @@
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fafafa;
-    color: #333;
+      /* use a subtle animated gradient for a modern feel */
+  --bg-1: #fff7ed; /* warm pastel start */
+  --bg-2: #fff1f0; /* warm pastel end */
+  --accent: #ff6b6b; /* coral accent */
+  --muted: #705a57; /* warm muted brown */
+      --card: #ffffff;
+      --glass: rgba(255,255,255,0.6);
+
+      color: #152711;
+      background: linear-gradient(120deg,var(--bg-1),var(--bg-2));
     line-height: 1.6;
+  }
+  /* animated subtle movement on the background (prefers-reduced-motion respected) */
+  @media (prefers-reduced-motion: no-preference) {
+    body::before{
+      content: '';
+      position: fixed;
+      inset: -20%;
+      background: radial-gradient(circle at 15% 20%, rgba(255,107,107,0.06), transparent 8%),
+                  radial-gradient(circle at 80% 85%, rgba(255,182,93,0.06), transparent 12%),
+                  radial-gradient(circle at 50% 40%, rgba(255,229,184,0.04), transparent 22%);
+      z-index: -1;
+      animation: bgFloat 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes bgFloat{
+      0%{ transform: translate3d(0,0,0) scale(1) }
+      50%{ transform: translate3d(3%, -2%, 0) scale(1.02) }
+      100%{ transform: translate3d(0,0,0) scale(1) }
+    }
+  }
+
+  /* tech-network SVG background */
+  #tech-bg{
+    position: fixed;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.18;
+  }
+  #tech-bg .node{ transform-origin: center; }
+
+  @keyframes nodePulse{
+    0%{ transform: scale(1) }
+    50%{ transform: scale(1.35) }
+    100%{ transform: scale(1) }
+  }
+  @keyframes linksShift{
+    0%{ transform: translateY(0) }
+    50%{ transform: translateY(-6px) }
+    100%{ transform: translateY(0) }
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    #tech-bg .node:nth-child(1){ animation: nodePulse 6s ease-in-out infinite; }
+    #tech-bg .node:nth-child(2){ animation: nodePulse 7s ease-in-out 0.8s infinite; }
+    #tech-bg .node:nth-child(3){ animation: nodePulse 5.5s ease-in-out 0.4s infinite; }
+    #tech-bg #links{ animation: linksShift 18s ease-in-out infinite; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    #tech-bg{ opacity: 0.08 }
   }
   a {
     color: #065fd4;
@@ -17,29 +77,41 @@
   }
   /* Header */
   header {
-    background: #fff;
-    border-bottom: 1px solid #ddd;
-    padding: 0.75rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  header .logo {
-    font-weight: 600;
-    font-size: 0.4rem;
-    color: #212121;
-  }
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.5));
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(15,23,42,0.06);
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 12px;
+      margin: 0 1rem;
+      border-radius: 12px;
+      z-index: 30;
+      box-shadow: 0 6px 20px rgba(2,6,23,0.06);
+    }
+    header .logo {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    header .logo h1{ font-size:1.05rem; margin:0 }
+    header .logo #typing{ font-weight:700 }
   nav a {
     margin-left: 1.5rem;
     font-weight: 500;
     font-size: 0.95rem;
-    color: #666;
+    color: var(--muted);
   }
   nav a:hover {
-    color: #007acc;
+    color: var(--accent);
+    transform: translateY(-2px);
+    transition: transform 180ms ease, color 180ms ease;
   }
   /* Main container */
   main {
@@ -53,8 +125,12 @@
     align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #ddd;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(2,6,23,0.04);
+    border: 1px solid rgba(15,23,42,0.04);
   }
   .profile-img {
     flex-shrink: 0;
@@ -62,7 +138,8 @@
     height: 160px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+    border: 4px solid rgba(255,255,255,0.5);
   }
   .profile-img img {
     width: 100%;
@@ -77,19 +154,19 @@
     margin-bottom: 0.2rem;
     font-weight: 700;
     font-size: 2rem;
-    color: #111;
+    color: #ebecef;
   }
   .profile-details h2 {
     font-weight: 400;
     font-size: 1.1rem;
-    color: #666;
+    color: #cca000;
     margin-top: 0;
     margin-bottom: 1rem;
   }
   .profile-details p {
     margin: 0.5rem 0;
     font-size: 1rem;
-    color: #444;
+    color: #198970;
     max-width: 620px;
   }
   .divider {
@@ -104,14 +181,15 @@
   }
   .social-links a {
     font-size: 1.25rem;
-    color: #555;
-    transition: color 0.3s;
+    color: #374151;
+    transition: color 240ms ease, transform 180ms ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
   .social-links a:hover {
-    color: #007acc;
+    color: var(--accent);
+    transform: translateY(-3px) scale(1.05);
   }
   /* Project Section */
   section.projects {
@@ -120,8 +198,8 @@
   section.projects h2 {
     font-size: 1.75rem;
     margin-bottom: 1rem;
-    color: #111;
-    border-left: 5px solid #007acc;
+    color: #ffffff;
+    border-left: 5px solid #cca000;
     padding-left: 0.5rem;
   }
   .project-list {
@@ -130,14 +208,20 @@
     margin: 0;
   }
   .project-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    background: var(--card);
+    border: 1px solid rgba(15,23,42,0.04);
+    border-radius: 12px;
     display: flex;
     gap: 1.25rem;
     padding: 1rem;
     margin-bottom: 1.25rem;
     align-items: center;
+    transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease;
+    will-change: transform;
+  }
+  .project-item:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(2,6,23,0.08);
   }
   .project-img {
     flex-shrink: 0;
@@ -161,7 +245,7 @@
     margin: 0;
     font-size: 1.1rem;
     font-weight: 600;
-    color: #222;
+    color: #93c5fd;
   }
   .project-description {
     font-size: 0.9rem;
@@ -182,6 +266,17 @@
     margin-right: 6px;
     user-select: none;
   }
+  /* colorful tag variants for better visual parsing */
+  .tag:nth-child(1){ background: linear-gradient(90deg,#e0f2fe,#bae6fd); color:#02467a }
+  .tag:nth-child(2){ background: linear-gradient(90deg,#eef2ff,#e6e6ff); color:#2b3a67 }
+  .tag:nth-child(3){ background: linear-gradient(90deg,#fef3c7,#fde68a); color:#6a5100 }
+  .tag:nth-child(4){ background: linear-gradient(90deg,#ecfdf5,#bbf7d0); color:#0b6b3a }
+  /* Deterministic tag colors (use classes in HTML) */
+  .tag--javascript{ background: linear-gradient(90deg,#e0f2fe,#bae6fd); color:#02467a }
+  .tag--node{ background: linear-gradient(90deg,#e6fffa,#ccfbf1); color:#0b6b3a }
+  .tag--json{ background: linear-gradient(90deg,#fff7ed,#ffe4b5); color:#6a5100 }
+  .tag--github{ background: linear-gradient(90deg,#f3f4f6,#e5e7eb); color:#111827 }
+  .tag--htmlcss{ background: linear-gradient(90deg,#ffe4f0,#ffd6e8); color:#6b214f }
   .project-year {
     font-size: 0.85rem;
     color: #888;
@@ -213,7 +308,7 @@
     font-size: 1.75rem;
     margin-bottom: 1rem;
     color: #111;
-    border-left: 5px solid #007acc;
+    border-left: 5px solid #cca000;
     padding-left: 0.5rem;
   }
   .experience-list {
@@ -258,8 +353,8 @@
   section.skills h2 {
     font-size: 1.75rem;
     margin-bottom: 1rem;
-    color: #111;
-    border-left: 5px solid #007acc;
+    color: #ffffff;
+    border-left: 5px solid #cca000;
     padding-left: 0.5rem;
   }
   .skills-list {
@@ -283,8 +378,8 @@
   section.resume h2 {
     font-size: 1.75rem;
     margin-bottom: 1rem;
-    color: #111;
-    border-left: 5px solid #007acc;
+    color: #ffffff;
+    border-left: 5px solid #cca000;
     padding-left: 0.5rem;
     text-align: left;
     max-width: 960px;
@@ -293,17 +388,18 @@
   }
   .resume-link {
     display: inline-block;
-    background-color: #007acc;
+    background: linear-gradient(90deg,var(--accent),#055aab);
     color: white;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 6px;
     font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 6px rgba(216, 3, 3, 0.867);
     transition: background-color 0.3s;
   }
   .resume-link:hover {
-    background-color: #055aab;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(2,6,23,0.12);
   }
   /* Contact Section */
   section.contact {
@@ -313,8 +409,8 @@
   section.contact h2 {
     font-size: 1.75rem;
     margin-bottom: 1rem;
-    color: #111;
-    border-left: 5px solid #007acc;
+    color: #ffffff;
+    border-left: 5px solid #cca000;
     padding-left: 0.5rem;
     max-width: 960px;
     margin-left: auto;
@@ -326,8 +422,8 @@
     max-width: 600px;
     padding: 1.5rem 2rem 2rem 2rem;
     margin: 0 auto;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+    border-radius: 12px;
   }
   .form-group {
     margin-bottom: 1.25rem;
@@ -336,7 +432,7 @@
   label {
     display: block;
     font-weight: 600;
-    color: #333;
+    color: #ff6b6b;
     margin-bottom: 0.3rem;
     font-size: 0.95rem;
   }
@@ -362,7 +458,7 @@
     min-height: 90px;
   }
   button[type="submit"] {
-    background-color: #007acc;
+    background: linear-gradient(90deg,var(--accent),#055aab);
     color: white;
     font-size: 1rem;
     font-weight: 600;
@@ -374,8 +470,64 @@
   }
   button[type="submit"]:hover,
   button[type="submit"]:focus {
-    background-color: #055aab;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(2,6,23,0.08);
   }
+  /* skill badge subtle animations */
+  .skill-badge{
+    background: linear-gradient(90deg, rgba(0,122,204,0.06), rgba(0,122,204,0.02));
+    border: 1px solid rgba(2,6,23,0.04);
+    padding: 6px 12px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+  .skill-badge:hover{ transform: translateY(-4px); box-shadow: 0 12px 24px rgba(2,6,23,0.06) }
+
+  /* dark mode support */
+  @media (prefers-color-scheme: dark){
+    :root{ color-scheme: dark; }
+    body{ background: linear-gradient(120deg,#071124,#081226); color:#e6eef6 }
+    header{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04) }
+    .profile-summary, .project-item, form.contact-form{ background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.04) }
+    .tag{ opacity: 0.95 }
+    .skill-badge{ background: rgba(255,255,255,0.02); color:#e6eef6 }
+    a{ color: #93c5fd }
+  }
+
+  /* Manual theme class override (used by JS toggle) */
+  .theme-dark{
+    --bg-1: #071124;
+    --bg-2: #081226;
+    --accent: #7dd3fc;
+    --muted: #fda893;
+    color-scheme: dark;
+  }
+  /* apply dark visuals when .theme-dark is present on documentElement/html */
+  .theme-dark body{ background: linear-gradient(120deg,#071124,#081226); color:#e6eef6 }
+  .theme-dark header{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04) }
+  .theme-dark .profile-summary, .theme-dark .project-item, .theme-dark form.contact-form{ background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.04) }
+  .theme-dark .tag{ opacity: 0.95 }
+  .theme-dark .skill-badge{ background: rgba(255,255,255,0.02); color:#e6eef6 }
+  .theme-dark a{ color: #93c5fd }
+  .theme-dark body::before{ opacity: 0.9 }
+
+  /* reveal animation */
+  .reveal{ opacity: 0; transform: translateY(10px) scale(0.995); transition: opacity 520ms cubic-bezier(.2,.8,.2,1), transform 520ms cubic-bezier(.2,.8,.2,1); will-change: opacity, transform }
+  .reveal.revealed{ opacity: 1; transform: translateY(0) scale(1) }
+
+  /* theme toggle button */
+  .theme-toggle{
+    appearance: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.05rem;
+    padding: 6px 8px;
+    border-radius: 8px;
+    transition: transform 180ms ease, background 180ms ease;
+  }
+  .theme-toggle:hover{ transform: translateY(-3px); background: rgba(2,6,23,0.04) }
   /* Responsive tweaks */
   @media (max-width: 640px) {
     .profile-summary {
