@@ -439,7 +439,7 @@ section.experience {
 section.experience h2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
-  color: #111;
+  color: #ec1e1e;
   border-left: 5px solid #cca000;
   padding-left: 0.5rem;
 }
@@ -684,6 +684,7 @@ button[type="submit"]:focus {
   .profile-details h1,
   section.skills h2,
   section.projects h2,
+  section.experience h2,
   section.resume h2,
   section.contact h2 {
     color: #ffffff;
@@ -743,6 +744,7 @@ button[type="submit"]:focus {
 .theme-dark .profile-details h1,
 .theme-dark section.skills h2,
 .theme-dark section.projects h2,
+.theme-dark section.experience h2,
 .theme-dark section.resume h2,
 .theme-dark section.contact h2 {
   color: #ffffff;
