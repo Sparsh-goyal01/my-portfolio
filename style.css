@@ -148,6 +148,7 @@ header {
   border-radius: 12px;
   z-index: 30;
   box-shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
+  text-transform: uppercase;
 }
 
 header .logo {
@@ -157,15 +158,19 @@ header .logo {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  min-width: 180px; /* Reserve space to prevent layout shift */
 }
 
 header .logo h1 {
   font-size: 1.05rem;
-  margin: 0
+  margin: 0;
+  display: inline-block;
+  min-width: 165px; /* Enough for "Sparsh Goyal" */
 }
 
 header .logo #typing {
-  font-weight: 700
+  font-weight: 700;
+  display: inline-block;
 }
 
 nav a {
@@ -484,7 +489,88 @@ section.experience h2 {
   color: #444;
 }
 
-/* Skills Section */
+/* Tech Stack Section - Aesthetic categorized layout */
+section.tech-stack {
+  margin-top: 3rem;
+}
+
+section.tech-stack h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color:  #ec1e1e;
+  font-weight: 700;
+  text-align: left;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.tech-category {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.tech-category:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.category-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ff6b35;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ff6b35;
+}
+
+.tech-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.tech-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #2b2d31, #1a1b1e);
+  color: #e5e7eb;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  user-select: none;
+  transition: all 250ms ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: default;
+}
+
+.tech-badge:hover {
+  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* Responsive adjustments for tech stack */
+@media (max-width: 768px) {
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  section.tech-stack h2 {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+}
+
+/* Old skills section kept for compatibility */
 section.skills {
   margin-top: 3rem;
 }
@@ -683,11 +769,28 @@ button[type="submit"]:focus {
   /* Make headings white in dark mode */
   .profile-details h1,
   section.skills h2,
+  section.tech-stack h2,
   section.projects h2,
   section.experience h2,
   section.resume h2,
   section.contact h2 {
     color: #ffffff;
+  }
+
+  /* Tech stack dark mode */
+  .tech-category {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .tech-category:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .category-title {
+    color: #ff8c42;
+    border-bottom: 2px solid #ff8c42;
   }
 
   /* Make project title headings consistent with link color */
@@ -743,6 +846,7 @@ button[type="submit"]:focus {
 /* Make headings white in dark mode */
 .theme-dark .profile-details h1,
 .theme-dark section.skills h2,
+.theme-dark section.tech-stack h2,
 .theme-dark section.projects h2,
 .theme-dark section.experience h2,
 .theme-dark section.resume h2,
@@ -750,22 +854,78 @@ button[type="submit"]:focus {
   color: #ffffff;
 }
 
+/* Tech stack dark mode styling */
+.theme-dark .tech-category {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.theme-dark .tech-category:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .category-title {
+  color: #ff8c42;
+  border-bottom: 2px solid #ff8c42;
+}
+
 /* Make project title headings consistent with link color */
 .theme-dark .project-content h3 {
   color: #93c5fd;
 }
 
-/* reveal animation */
+/* reveal animation - optimized for all screen modes */
 .reveal {
   opacity: 0;
-  transform: translateY(10px) scale(0.995);
-  transition: opacity 520ms cubic-bezier(.2, .8, .2, 1), transform 520ms cubic-bezier(.2, .8, .2, 1);
-  will-change: opacity, transform
+  transform: translateY(20px) scale(0.98);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.revealed {
   opacity: 1;
-  transform: translateY(0) scale(1)
+  transform: translateY(0) scale(1);
+  will-change: auto; /* Reset will-change after animation */
+}
+
+/* Reduced motion support - instant reveal */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  
+  .reveal.revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mobile optimizations - shorter distance and duration */
+@media (max-width: 640px) {
+  .reveal {
+    transform: translateY(10px) scale(0.99);
+    transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .reveal {
+    transform: translateY(15px) scale(0.985);
+    transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Performance optimization for animations */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal:not(.revealed) {
+    will-change: opacity, transform;
+  }
 }
 
 /* theme toggle button */
