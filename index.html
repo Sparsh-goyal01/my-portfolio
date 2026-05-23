@@ -1,386 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="style.css">
-<title>Sparsh Goyal Portfolio</title>
-<!-- Icons from FontAwesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sparsh Goyal</title>
+  <meta name="description" content="Sparsh Goyal - Developer focused on modern web apps, data analytics, and problem solving." />
+  <meta property="og:title" content="Sparsh Goyal | Developer Portfolio" />
+  <meta property="og:description" content="Modern portfolio featuring projects, skills, and achievements." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="profile.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sparsh Goyal | Developer Portfolio" />
+  <meta name="twitter:description" content="Modern portfolio featuring projects, skills, and achievements." />
+  <meta name="twitter:image" content="profile.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-<!-- tech-network background SVG (keeps DOM light, purely decorative) -->
-<svg id="tech-bg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-  <defs>
-    <linearGradient id="nodeGrad" x1="0" x2="1">
-      <stop offset="0%" stop-color="rgba(255,107,107,0.9)" />
-      <stop offset="100%" stop-color="rgba(255,182,93,0.9)" />
-    </linearGradient>
-  </defs>
-  <g id="links" stroke="rgba(255,255,255,0.06)" stroke-width="1">
-    <line x1="120" y1="120" x2="300" y2="190" />
-    <line x1="300" y1="190" x2="520" y2="140" />
-    <line x1="520" y1="140" x2="840" y2="220" />
-    <line x1="920" y1="80" x2="1100" y2="160" />
-    <line x1="200" y1="420" x2="480" y2="360" />
-    <line x1="700" y1="460" x2="920" y2="400" />
-  </g>
-  <g id="nodes">
-    <circle cx="120" cy="120" r="6" fill="url(#nodeGrad)" class="node" />
-    <circle cx="300" cy="190" r="7" fill="url(#nodeGrad)" class="node" />
-    <circle cx="520" cy="140" r="5" fill="url(#nodeGrad)" class="node" />
-    <circle cx="840" cy="220" r="8" fill="url(#nodeGrad)" class="node" />
-    <circle cx="920" cy="80" r="6" fill="url(#nodeGrad)" class="node" />
-    <circle cx="1100" cy="160" r="5" fill="url(#nodeGrad)" class="node" />
-    <circle cx="200" cy="420" r="6" fill="url(#nodeGrad)" class="node" />
-    <circle cx="480" cy="360" r="7" fill="url(#nodeGrad)" class="node" />
-    <circle cx="700" cy="460" r="5" fill="url(#nodeGrad)" class="node" />
-    <circle cx="920" cy="400" r="6" fill="url(#nodeGrad)" class="node" />
-  </g>
-</svg>
-<header>
-  <div class="logo" tabindex="0">
-     <h1><span id="typing"></span></h1>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
-      new Typed("#typing", {
-        strings: ["Sparsh Goyal", "Craft, Code!"],
-        typeSpeed: 40,
-        backSpeed: 30,
-        loop: true
-      });
-    </script>
+  <div class="bg-system" aria-hidden="true">
+    <div class="bg-base"></div>
+    <div class="aurora">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+      <span class="blob blob-3"></span>
+      <span class="blob blob-4"></span>
+      <span class="blob blob-5"></span>
+    </div>
+    <div class="particles" id="particles"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-noise"></div>
   </div>
-  <nav aria-label="Primary navigation">
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <!-- <a href="#experience">Experience</a> -->
-    <a href="#resume">Resume</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <button id="themeToggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle dark or light theme" onclick="(function(e){const r=document.documentElement; const is=r.classList.toggle('theme-dark'); try{ localStorage.setItem('theme', is? 'dark':'light'); }catch{} this.textContent=is? '☀️':'🌙'; this.setAttribute('aria-pressed', String(is)); }).call(this,event)">🌙</button>
-</header>
-<script>
-  (function(){
-    try{
-      const btn = document.getElementById('themeToggle');
-      if(!btn) return;
-      const root = document.documentElement;
-      const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const apply = (t) => {
-        if(t === 'dark') root.classList.add('theme-dark'); else root.classList.remove('theme-dark');
-        const isDark = root.classList.contains('theme-dark');
-        btn.textContent = isDark ? '☀️' : '🌙';
-        btn.setAttribute('aria-pressed', String(isDark));
-      };
-      apply(stored ? stored : (prefersDark ? 'dark' : 'light'));
-      btn.addEventListener('click', () => {
-        const isDark = root.classList.toggle('theme-dark');
-        const next = isDark ? 'dark' : 'light';
-        try{ localStorage.setItem('theme', next); } catch(e){}
-        btn.textContent = isDark ? '☀️' : '🌙';
-        btn.setAttribute('aria-pressed', String(isDark));
-      });
-    }catch(e){ console.error('theme init failed', e); }
-  })();
-</script>
-<main>
-  <section class="profile-summary reveal" aria-label="Profile Summary">
-    <div class="profile-img" aria-hidden="true">
-      <img src="profile.png" alt="profile photo" />
-    </div>
-    <div class="profile-details">
-      <h1 tabindex="0">Sparsh Goyal</h1>
-      <h2 tabindex="0">Developer</h2>
-      <p tabindex="0">
-        Aspiring Developer skilled in building modern web applications, Data Analysis & visualization and Problem Solving.
-      </p>
-      <div class="divider" aria-hidden="true"></div>
-      <p tabindex="0">
-        Interests: Web Development, Data Analytics, DSA, Open Source.
-      </p>
-      <div class="divider" aria-hidden="true"></div>
-      <div class="social-links" aria-label="Social media profiles">
-        <a href="index.html" aria-label="homepage" rel="noopener noreferrer"><i class="fas fa-home"></i></a>
-        <a href="mailto:sparshgoyal2008.bittu@gmail.com" aria-label="Send email to Sparsh goyal"><i class="fas fa-envelope"></i></a>
-        <a href="https://github.com/Sparsh-goyal01" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/sparshgoyal06" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://twitter.com/Sparshgoyal01" aria-label="Twitter profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com/Sparsh_goyal01" aria-label="Instagram profile" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-      </div>
-    </div>
-  </section>
+  <div class="ambient" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="logo" href="#hero" aria-label="Go to top">
+      <span class="logo-mark">SG</span>
+      <span class="logo-text">Sparsh Goyal</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav id="primary-nav" class="site-nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+  </header>
 
-  <section id="skills" class="tech-stack reveal" aria-label="Tech Stack">
-    <h2 tabindex="0">Tech Stack</h2>
-    
-    <div class="tech-grid">
-      <!-- Languages -->
-      <div class="tech-category reveal">
-        <h3 class="category-title">Languages</h3>
-        <div class="tech-items">
-          <span class="tech-badge">JavaScript</span>
-          <span class="tech-badge">C++</span>
-          <!-- <span class="tech-badge">Python</span> -->
-          <span class="tech-badge">SQL</span>
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero-content" data-reveal>
+        <h1>Hello, I am <span class="accent">Sparsh Goyal</span>.</h1>
+        <p class="lead">Aspiring Software Backend developer focused on building modern web applications, data analytics, and problem solving.</p>
+        <div class="hero-tags">
+          <span class="chip">Full Stack</span>
+          <span class="chip">Data Analytics</span>
+          <span class="chip">DSA</span>
+          <span class="chip">Open Source</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn ghost" href="#contact">Let's Talk</a>
+        </div>
+        <div class="hero-social">
+          <a href="mailto:sparshgoyal2008.bittu@gmail.com" aria-label="Email Sparsh">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://github.com/Sparsh-goyal01" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/sparshgoyal06" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://twitter.com/Sparshgoyal01" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://instagram.com/Sparsh_goyal01" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
         </div>
       </div>
-
-      <!-- Frameworks -->
-      <div class="tech-category reveal">
-        <h3 class="category-title">Frameworks</h3>
-        <div class="tech-items">
-          <span class="tech-badge">Node js</span>
-          <span class="tech-badge">Express</span>
-          <!-- <span class="tech-badge">React</span> -->
-        </div>
-      </div>
-
-      <!-- Data & Analytics -->
-      <div class="tech-category reveal">
-        <h3 class="category-title">Data & Analytics</h3>
-        <div class="tech-items">
-          <span class="tech-badge">Power BI</span>
-          <span class="tech-badge">Tableau</span>
-          <span class="tech-badge">Excel</span>
-          <!-- <span class="tech-badge">Data Analysis</span> -->
-        </div>
-      </div>
-
-      <!-- Databases -->
-      <div class="tech-category reveal">
-        <h3 class="category-title">Databases</h3>
-        <div class="tech-items">
-          <span class="tech-badge">MySQL</span>
-          <span class="tech-badge">PostgreSQL</span>
-          <span class="tech-badge">Firebase</span>
-        </div>
-      </div>
-
-      <!-- Tools & DevOps -->
-      <div class="tech-category reveal">
-        <h3 class="category-title">Tools & Version Control</h3>
-        <div class="tech-items">
-          <span class="tech-badge">Git</span>
-          <span class="tech-badge">GitHub</span>
-          <!-- <span class="tech-badge">VS Code</span> -->
-          <!-- <span class="tech-badge">Vite</span> -->
-        </div>
-      </div>
-
-      <!-- Other Skills -->
-      <div class="tech-category reveal">
-        <h3 class="category-title">Other Skills</h3>
-        <div class="tech-items">
-          <span class="tech-badge">DSA</span>
-          <span class="tech-badge">REST APIs</span>
-          <!-- <span class="tech-badge">PWA</span> -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects" class="projects">
-    <h2 tabindex="0">Projects</h2>
-    <ul class="project-list">
-    
-      <li class="project-item">
-        <div class="project-img" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=150&q=80" alt="Project Vacay thumbnail" />
-        </div>
-        <div class="project-content">
-          <h3><a href="https://github.com/Sparsh-goyal01/Odoo_stockmaster_2024cssparsh.git" style="text-decoration: none;">Stock Master: Inventory Management System</a></h3>
-          <p class="project-description">StockMaster helps in efficient stock tracking, supplier management, and automated inventory operations with a smooth and intuitive user experience </p>
-          <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag tag--javascript">JavaScript</span>
-            <span class="tag tag--htmlcss">TypeScript</span>
-            <span class="tag tag--htmlcss">React</span>
-            <span class="tag tag--htmlcss">Vite</span>
-            <span class="tag tag--htmlcss">MySQL</span>
-            <span class="tag tag--github">GitHub</span>
-          </div>  
-          <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-vacay-desc" data-target="project">Read More</button>
-          <p id="project-vacay-desc" hidden>
-            Developed a full-stack web application to streamline result entry and display for educational institutions. The system allows users to add, store, view, and export student academic results through a responsive and interactive interface.
-          </p> -->
-        </div>
-        <div class="project-year" aria-label="Project year">2025</div>
-      </li>
-
-      <li class="project-item">
-        <div class="project-img" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=150&q=80" alt="Project Vacay thumbnail" />
-        </div>
-        <div class="project-content">
-          <h3><a href="https://github.com/Sparsh-goyal01/Likhlo-Your-own-Diary.git" style="text-decoration: none;">Likhlo: Your Own Diary</a></h3>
-          <p class="project-description">Likhlo is a secure, minimal notes and diary web application designed to provide a distraction-free writing experience across devices. It is fully responsive and can be installed as a Progressive Web App (PWA), offering an app-like experience on both mobile and desktop          </p>
-          <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag tag--javascript">JavaScript</span>
-            <span class="tag tag--htmlcss">HTML5 & CSS3</span>
-            <span class="tag tag--htmlcss">Firebase</span>
-            <span class="tag tag--github">GitHub</span>
-          </div>  
-          <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-vacay-desc" data-target="project">Read More</button>
-          <p id="project-vacay-desc" hidden>
-            Developed a full-stack web application to streamline result entry and display for educational institutions. The system allows users to add, store, view, and export student academic results through a responsive and interactive interface.
-          </p> -->
-        </div>
-        <div class="project-year" aria-label="Project year">2026</div>
-      </li>
-
-      <li class="project-item">
-        <div class="project-img" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=150&q=80" alt="Project Vacay thumbnail" />
-        </div>
-        <div class="project-content">
-          <h3><a href="https://github.com/Sparsh-goyal01/Result-Management-System.git" style="text-decoration: none;">Student Result Management System</a></h3>
-          <p class="project-description">
-            A Basic responsive full stack web learning project for updating student results as a College & School edition.
-          </p>
-          <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag tag--javascript">JavaScript</span>
-            <span class="tag tag--node">Nodejs</span>
-            <span class="tag tag--json">Json Storage</span>
-            <span class="tag tag--github">GitHub</span>
-          </div>  
-          <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-vacay-desc" data-target="project">Read More</button>
-          <p id="project-vacay-desc" hidden>
-            Developed a full-stack web application to streamline result entry and display for educational institutions. The system allows users to add, store, view, and export student academic results through a responsive and interactive interface.
-          </p> -->
-        </div>
-        <div class="project-year" aria-label="Project year">2025</div>
-      </li>
-      <li class="project-item">
-        <div class="project-img" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=150&q=80" alt="Project Micromouse thumbnail" />
-        </div>
-        <div class="project-content">
-          <h3>Chatify-Ai-chat-enhancer</h3>
-          <p class="project-description">
-            Chat enhancer using AI to professionalize conversation within a friendly web interface.
-          </p>
-          <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag tag--htmlcss">HTML CSS</span>
-            <span class="tag tag--json">Json Storage</span>
-            <span class="tag tag--javascript">JavaScript</span>
+      <div class="hero-visual" data-reveal>
+        <div class="profile-card">
+          <div class="profile-photo">
+            <img src="profile.png" alt="Portrait of Sparsh Goyal" />
           </div>
-          <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-micromouse-desc" data-target="project">Read More</button>
-          <p id="project-micromouse-desc" hidden>
-            Chat enhancer using AI to professionalize conversation within a friendly web interface.
-          </p> -->
-        </div>
-        <div class="project-year" aria-label="Project year">2024</div>
-      </li>
-
-      <li class="project-item">
-        <div class="project-img" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=150&q=80" alt="Project Vacay thumbnail" />
-        </div>
-        <div class="project-content">
-          <h3><a href="https://github.com/Sparsh-goyal01/Travel-Website-WanderWise.git" style="text-decoration: none;">WanderWise: A travel Website</a></h3>
-          <p class="project-description">
-            A Basic responsive Frontend based travel website Powered by IXIGO online booking platform for booking tickets having some unique features annd some are on under maintenance.
-          </p>
-          <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag tag--javascript">JavaScript</span>
-            <span class="tag tag--htmlcss">HTML5 & CSS3</span>
-            <span class="tag tag--github">GitHub</span>
-          </div>  
-          <!-- <button class="read-more-btn" aria-expanded="false" aria-controls="project-vacay-desc" data-target="project">Read More</button>
-          <p id="project-vacay-desc" hidden>
-            Developed a full-stack web application to streamline result entry and display for educational institutions. The system allows users to add, store, view, and export student academic results through a responsive and interactive interface.
-          </p> -->
-        </div>
-        <div class="project-year" aria-label="Project year">2024</div>
-      </li>
-      <!-- <li class="project-item">
-        <div class="project-img" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=150&q=80" alt="Project CodeCamp thumbnail" />
-        </div>
-        <div class="project-content">
-          <h3>CodeCamp</h3>
-          <p class="project-description">
-            Interactive coding bootcamp platform to teach JavaScript, React, and Node.js fundamentals.
-          </p>
-          <div class="project-tags" aria-label="Project technologies used">
-            <span class="tag">JavaScript</span>
-            <span class="tag">React</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">Express</span>
+          <div class="profile-meta">
+            <h2>SPARSH GOYAL</h2>
+            <p>DEVELOPER • MERN STACK • PROBLEM SOLVING</p>
           </div>
-          <button class="read-more-btn" aria-expanded="false" aria-controls="project-codecamp-desc" data-target="project-codecamp-desc">Read More</button>
-          <p id="project-codecamp-desc" hidden>
-            CodeCamp is an online learning platform providing interactive coding lessons and real-time code challenges with instant feedback. It uses modern web technologies including React for frontend and Node.js/Express for the backend API.
-          </p>
+          <div class="profile-stats">
+            <div>
+              <span class="stat-label">Focus</span>
+              <span class="stat-value">Backend Development</span>
+            </div>
+            <div>
+              <span class="stat-label">Current</span>
+              <span class="stat-value">DSA solver</span>
+            </div>
+            <!-- <div>
+              <span class="stat-label">Strength</span>
+              <span class="stat-value">Clean UI, fast delivery</span>
+            </div> -->
+          </div>
         </div>
-        <div class="project-year" aria-label="Project year">2021</div> -->
-      </li>
-    </ul>
-  </section>
-
-   <section id="experience" class="experience">
-    <h2 tabindex="0">Achievements</h2>
-    <ul class="experience-list">
-      <li class="experience-item">
-        <h3>TechnoCrats Hackathon Winner</h3>
-        <div class="experience-role">Winner</div>
-        <div class="experience-duration">2025</div>
-        <p class="experience-description">
-          A 36 hour online hackathon focusing on open innovation, We developed a secured platform for purge level data eraser.
-        </p>
-      </li>
-      <!-- <li class="experience-item">
-        <h3>Full Stack Developer</h3>
-        <div class="experience-role">NextGen Solutions</div>
-        <div class="experience-duration">2017 - 2021</div>
-        <p class="experience-description">
-          Developed and maintained client projects involving React frontends and Node.js backends with RESTful APIs. Improved CI/CD pipelines and reduced deployment times by 40%.
-        </p>
-      </li>
-      <li class="experience-item">
-        <h3>Software Developer Intern</h3>
-        <div class="experience-role">StartupX</div>
-        <div class="experience-duration">Summer 2016</div>
-        <p class="experience-description">
-          Created internal tools for automating report generation and analysis. Collaborated closely with product team on UX improvements.
-        </p>
-      </li> -->
-    </ul>
-  </section>
-
-  
-
-  <section id="resume" class="resume" aria-label="Resume download">
-    <h2 tabindex="0">Resume</h2>
-    <a href="SparshResume.pdf" class="resume-link" download aria-label="Download resume as PDF">Download My Resume (PDF)</a>
-  </section>
-
-  <section id="contact" class="contact" aria-label="Contact form">
-    <h2 tabindex="0">Contact Me</h2>
-    <form class="contact-form" id="contactForm" novalidate>
-      <div class="form-group">
-        <label for="name">Name <sup>*</sup></label>
-        <input type="text" id="name" name="name" required aria-required="true" aria-describedby="nameError" placeholder="Your full name" />
-        <small id="nameError" aria-live="polite" style="color:#d00;"></small>
       </div>
-      <div class="form-group">
-        <label for="email">Email <sup>*</sup></label>
-        <input type="email" id="email" name="email" required aria-required="true" aria-describedby="emailError" placeholder="you@example.com" />
-        <small id="emailError" aria-live="polite" style="color:#d00;"></small>
-      </div>
-      <div class="form-group">
-        <label for="message">Message <sup>*</sup></label>
-        <textarea id="message" name="message" required aria-required="true" aria-describedby="messageError" placeholder="Your message here..." rows="5"></textarea>
-        <small id="messageError" aria-live="polite" style="color:#d00;"></small>
-      </div>
-      <button type="submit">Send Message</button>
-      <p id="formStatus" role="alert" style="margin-top:1rem; color:green;"></p>
-    </form>
-  </section>
-</main>
+    </section>
 
-<script src="script.js"></script>
+    <section id="about" class="about">
+      <div class="section-title" data-reveal>
+        <p class="eyebrow">About</p>
+        <h2>Driven by clarity, curiosity, and impact.</h2>
+      </div>
+      <div class="about-grid" data-reveal>
+        <div class="about-card">
+          <h3>Introduction</h3>
+          <p>I build scalable web apps with clean backend systems and data-driven solutions.</p>
+        </div>
+        <div class="about-card">
+          <h3>Career Summary</h3>
+          <p>Aspiring backend-focused SDE with strong DSA, API, and database skills.</p>
+        </div>
+        <div class="about-card">
+          <h3>Skills Summary</h3>
+          <p>C++, Node.js, Express.js, SQL, React.js, REST APIs, System Design, and Git.</p>
+        </div>
+        <div class="about-card">
+          <h3>Interests</h3>
+          <p>Backend engineering, scalable systems, problem solving, and modern web development.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="experience">
+      <div class="section-title" data-reveal>
+        <p class="eyebrow">Achievements</p>
+        <h2>Milestones that shaped my journey.</h2>
+      </div>
+      <div class="timeline" data-reveal>
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-meta">
+              <span>2025</span>
+              <span>Winner</span>
+            </div>
+            <h3>TechnoCrats Hackathon Winner</h3>
+            <p>Built a secured platform for purge-level data erasing during a 36-hour innovation sprint.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="skills">
+      <div class="section-title" data-reveal>
+        <p class="eyebrow">Skills</p>
+        <h2>Tools and technologies I use to ship.</h2>
+      </div>
+      <div class="skills-grid" data-reveal>
+        <article class="skill-card">
+          <h3>Languages</h3>
+          <div class="skill-tags">
+            <span>JavaScript</span>
+            <span>C++</span>
+            <span>SQL</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <h3>Frameworks</h3>
+          <div class="skill-tags">
+            <span>Node.js</span>
+            <span>Express</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <h3>Data & Analytics</h3>
+          <div class="skill-tags">
+            <span>Power BI</span>
+            <span>Tableau</span>
+            <span>Excel</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <h3>Databases</h3>
+          <div class="skill-tags">
+            <span>MySQL</span>
+            <span>PostgreSQL</span>
+            <span>Firebase</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <h3>Tools & Version Control</h3>
+          <div class="skill-tags">
+            <span>Git</span>
+            <span>GitHub</span>
+          </div>
+        </article>
+        <article class="skill-card">
+          <h3>Other Skills</h3>
+          <div class="skill-tags">
+            <span>DSA</span>
+            <span>REST APIs</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="projects">
+      <div class="section-title" data-reveal>
+        <p class="eyebrow">Projects</p>
+        <h2>Selected work with modern stacks.</h2>
+      </div>
+      <div class="projects-featured" data-reveal>
+        <article class="project-card featured">
+          <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=900&q=80" alt="Stock Master project" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <h3>Stock Master: Inventory Management System</h3>
+            <p>Efficient stock tracking, supplier management, and automated inventory operations with a smooth UX.</p>
+            <div class="project-tags">
+              <span>JavaScript</span>
+              <span>TypeScript</span>
+              <span>React</span>
+              <span>Vite</span>
+              <span>MySQL</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/Sparsh-goyal01/Odoo_stockmaster_2024cssparsh.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card featured">
+          <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=900&q=80" alt="Likhlo diary app project" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <h3>Likhlo: Your Own Diary</h3>
+            <p>Secure, minimal notes and diary app with PWA support for a distraction-free writing flow.</p>
+            <div class="project-tags">
+              <span>JavaScript</span>
+              <span>HTML5 & CSS3</span>
+              <span>Firebase</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/Sparsh-goyal01/Likhlo-Your-own-Diary.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="projects-grid" data-reveal>
+        <article class="project-card">
+          <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=700&q=80" alt="Student Result Management System" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <h3>Student Result Management System</h3>
+            <p>Responsive full-stack learning project for updating student results in schools and colleges.</p>
+            <div class="project-tags">
+              <span>JavaScript</span>
+              <span>Node.js</span>
+              <span>JSON Storage</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/Sparsh-goyal01/Result-Management-System.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80" alt="Chatify project" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <h3>Chatify AI Chat Enhancer</h3>
+            <p>AI-powered chat enhancer to professionalize conversations inside a friendly web interface.</p>
+            <div class="project-tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+            </div>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-visual">
+            <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=700&q=80" alt="WanderWise travel website" loading="lazy" />
+          </div>
+          <div class="project-body">
+            <h3>WanderWise: A Travel Website</h3>
+            <p>Responsive frontend travel website inspired by modern booking platforms with unique features.</p>
+            <div class="project-tags">
+              <span>JavaScript</span>
+              <span>HTML5 & CSS3</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/Sparsh-goyal01/Travel-Website-WanderWise.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="resume" class="resume">
+      <div class="resume-card" data-reveal>
+        <div>
+          <p class="eyebrow">Resume</p>
+          <h2>Download my resume for a full view.</h2>
+          <p>Quick snapshot of my experience, skills, and education in one PDF.</p>
+        </div>
+        <a class="btn primary" href="SparshResume.pdf" download>Download Resume</a>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="section-title" data-reveal>
+        <p class="eyebrow">Contact</p>
+        <h2>Let's build something premium together.</h2>
+      </div>
+      <div class="contact-grid" data-reveal>
+        <div class="contact-card">
+          <h3>Reach out</h3>
+          <p>Email: <a href="mailto:sparshgoyal2008.bittu@gmail.com">sparshgoyal2008.bittu@gmail.com</a></p>
+          <p>LinkedIn: <a href="https://linkedin.com/in/sparshgoyal06" target="_blank" rel="noopener noreferrer">linkedin.com/in/sparshgoyal06</a></p>
+          <p>GitHub: <a href="https://github.com/Sparsh-goyal01" target="_blank" rel="noopener noreferrer">github.com/Sparsh-goyal01</a></p>
+        </div>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Name <span>*</span></label>
+            <input type="text" id="name" name="name" required aria-required="true" aria-describedby="nameError" placeholder="Your full name" />
+            <small id="nameError" aria-live="polite"></small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email <span>*</span></label>
+            <input type="email" id="email" name="email" required aria-required="true" aria-describedby="emailError" placeholder="you@example.com" />
+            <small id="emailError" aria-live="polite"></small>
+          </div>
+          <div class="form-group">
+            <label for="message">Message <span>*</span></label>
+            <textarea id="message" name="message" required aria-required="true" aria-describedby="messageError" placeholder="Tell me about your project" rows="5"></textarea>
+            <small id="messageError" aria-live="polite"></small>
+          </div>
+          <button class="btn primary" type="submit">Send Message</button>
+          <p id="formStatus" role="alert"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Copyright <span id="year"></span> Sparsh Goyal. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
 
