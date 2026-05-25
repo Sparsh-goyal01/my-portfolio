@@ -2,6 +2,9 @@ const root = document.documentElement;
 const particleLayer = document.getElementById("particles");
 const aurora = document.querySelector(".aurora");
 const bgGlow = document.querySelector(".bg-glow");
+const touchCursor = document.createElement("div");
+touchCursor.className = "touch-cursor";
+document.body.appendChild(touchCursor);
 
 const navToggle = document.querySelector(".nav-toggle");
 const header = document.querySelector(".site-header");
@@ -21,7 +24,8 @@ if ("IntersectionObserver" in window) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
-          obs.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove("is-visible");
         }
       });
     },
@@ -32,6 +36,23 @@ if ("IntersectionObserver" in window) {
 } else {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
+
+let lastScrollY = window.scrollY;
+window.addEventListener(
+  "scroll",
+  () => {
+    const current = window.scrollY;
+    if (current > lastScrollY + 6) {
+      document.body.classList.add("scroll-down");
+      document.body.classList.remove("scroll-up");
+    } else if (current < lastScrollY - 6) {
+      document.body.classList.add("scroll-up");
+      document.body.classList.remove("scroll-down");
+    }
+    lastScrollY = current;
+  },
+  { passive: true }
+);
 
 const setPointer = (event) => {
   const x = (event.clientX / window.innerWidth) * 100;
@@ -50,6 +71,48 @@ const setPointer = (event) => {
 };
 
 window.addEventListener("mousemove", setPointer, { passive: true });
+
+const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+if (isTouchDevice) {
+  window.addEventListener(
+    "touchstart",
+    (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      touchCursor.classList.add("is-active");
+      touchCursor.style.left = `${touch.clientX}px`;
+      touchCursor.style.top = `${touch.clientY}px`;
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "touchmove",
+    (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      touchCursor.style.left = `${touch.clientX}px`;
+      touchCursor.style.top = `${touch.clientY}px`;
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "touchend",
+    () => {
+      touchCursor.classList.remove("is-active");
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "touchcancel",
+    () => {
+      touchCursor.classList.remove("is-active");
+    },
+    { passive: true }
+  );
+}
 
 if (particleLayer) {
   const count = 48;
